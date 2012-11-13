@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Exo:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' type='text/css' href='stylesheets/digger.css' />
+    <title>DiGGeR</title>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='header'>
+        <h1>DiGGeR... <span class='smaller'>Finds the posts that you kinda remember seeing before</span></h1>
+      </div>
+      <div id='greet-or-welcome'>
+        <% if logged_in? %>
+          <%= erb :greet %>
+        <% else %>
+          <%= erb :welcome %>
+        <% end %>
+      </div>
+      <%=yield%>
+    </div>
+  </body>
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+  <script type='text/javascript' src='http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.js'></script>
+  <script id="ajax-post" type="text/x-handlebars-template">
+    <div class='post'>
+      <p>{{message}}</p>
+      <i>{{created_time}}</i>
+    </div>
+    <hr />
+  </script>
+  <script type='text/javascript'>
+    $('#submit').click(function(event) {
+      var _query= $('#form-needle input').val();
+      var _user = $('#form-haystack input').val();
+
+      $.ajax({
+        url:'/search',
+        method: 'GET',
+        data: {user: _user, query: _query},
+        dateType: 'json',
+        success: function(data) {
+          $('#form-needle input').val('');
+          $('#form-haystack input').val('');
+          $.each(data, function(i) {
+            var source = $("#ajax-post").html();
+            var template = Handlebars.compile(source);
+            $('#results').append(template(data[i]));
+          });
+        }
+      });
+
+      event.preventDefault();
+    });
+  </script>
+</html>

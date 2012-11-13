@@ -1,0 +1,61 @@
+@import 'bourbon/bourbon';
+@import 'neat/neat';
+
+#container {
+  @include outer-container;
+}
+
+#header {
+  @include span-columns(12);
+
+  text-align:center;
+
+  h1 {
+    font-family: 'Exo', sans-serif;
+    font-size: 49px;
+  }
+
+  .smaller {
+    font-family: 'Exo', sans-serif;
+    font-size: 21px;
+    font-weight: normal;
+  }
+}
+
+#greet-or-welcome {
+  @include span-columns(12);
+
+  text-align:center;
+}
+
+#form-area {
+  @include span-columns(12);
+
+  #form-needle {
+    @include span-columns(5);
+    input {
+      padding:10px;
+      width: 90%;
+    }
+  }
+
+  #form-haystack {
+    @include span-columns(5);
+    input {
+      padding:10px;
+      width:90%;
+    }
+  }
+
+  #form-submit {
+    @include span-columns(2);
+    button {
+      padding:10px;
+      width:90%;
+    }
+  }
+}
+
+#results {
+  @include span-columns(12);
+}

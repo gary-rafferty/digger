@@ -1,0 +1,21 @@
+<div id='form-area'>
+  <form id='searchform' method='GET' action='/search'>
+    <div id='form-needle'>
+      <input type='text' name='query' placeholder='Something interesting that you remember seeeing' />
+    </div>
+    <div id='form-haystack'>
+      <input type='text' name='user' list='friends' placeholder="The person whos profile you saw it on" />
+      <datalist id='friends'>
+        <% @pals.each do |pal| %>
+          <option value='<%=pal['name']%>'>
+        <% end %>
+      </datalist>
+    </div>
+    <div id='form-submit'>
+      <button id='submit'>Diggidy Diggidy</button>
+    </div>
+  </form>
+</div>
+<div id='results'>
+
+</div>
