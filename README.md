@@ -16,9 +16,9 @@ Neat. Lots of cool shit.
 
 ### Todo
 
-Write some tests. Pref MiniTest.
-Check is Redis hash exists and action accordingly.
-Style the Handlebars template.
-Allow searching of multiple users.
-Show some sort of spinner as searches can take a while.
-Further lookback in history
+* Write some tests. Pref MiniTest.
+* Check is Redis hash exists and action accordingly.
+* Style the Handlebars template.
+* Allow searching of multiple users.
+* Show some sort of spinner as searches can take a while.
+* Further lookback in history
