@@ -7,7 +7,7 @@
       <input type='text' name='user' list='friends' placeholder="The person whos profile you saw it on" />
       <datalist id='friends'>
         <% @pals.each do |pal| %>
-          <option value='<%=pal['name']%>'>
+          <option value="<%=pal['name']%>">
         <% end %>
       </datalist>
     </div>
