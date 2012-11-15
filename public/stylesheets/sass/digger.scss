@@ -58,4 +58,18 @@
 
 #results {
   @include span-columns(12);
+  margin-top:40px;
+
+  .post {
+    @include span-columns(6 of 12);
+    @include nth-omega(2n);
+    @include box-shadow(0 0 1px 0 hsla(0, 0%, 0%, 0.65));
+    @include border-radius(2px);
+    font-size: 11px;
+    font-family: $lucida-grande;
+    color: #333;
+    line-height: 1.28;
+    margin-bottom:10px;
+    border: 1px solid #bbb;
+  }
 }

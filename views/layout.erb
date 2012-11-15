@@ -23,12 +23,12 @@
   </body>
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
   <script type='text/javascript' src='http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.js'></script>
+  <script type='text/javascript' src='http://github.com/bartaz/sandbox.js/raw/master/jquery.highlight.js'></script>
   <script id="ajax-post" type="text/x-handlebars-template">
     <div class='post'>
       <p>{{message}}</p>
       <i>{{created_time}}</i>
     </div>
-    <hr />
   </script>
   <script type='text/javascript'>
     $('#submit').click(function(event) {
@@ -48,6 +48,8 @@
             var source = $("#ajax-post").html();
             var template = Handlebars.compile(source);
             $('#results').append(template(data[i]));
+            $('.post').highlight(_query);
+            $('.highlight').css({ backgroundColor:"#ffff88"});
           });
         }
       });

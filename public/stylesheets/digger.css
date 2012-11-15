@@ -82,6 +82,26 @@
   display: block;
   float: left;
   margin-right: 2.35765%;
-  width: 100%; }
+  width: 100%;
+  margin-top: 40px; }
   #results:last-child {
     margin-right: 0; }
+  #results .post {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 48.82117%;
+    -webkit-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.65);
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.65);
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+    color: #333;
+    line-height: 1.28;
+    margin-bottom: 10px;
+    border: 1px solid #bbb; }
+    #results .post:last-child {
+      margin-right: 0; }
+    #results .post:nth-child(2n) {
+      margin-right: 0; }
