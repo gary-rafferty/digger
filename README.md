@@ -9,10 +9,16 @@ problem is that I have no way of finding this post.
 DiGGer aims to solve that problem by providing a way to search through a
 users' posts and select those that match a given query.
 
-### Dets
+### Built with
 
-Uses Sinatra, MongoDB, Redis, Handlebars.js, jQuery, Sass, Bourbon &
-Neat. Lots of cool shit.
+* Sinatra 
+* MongoDB, for persisting users and their access tokens 
+* Redis, for caching Facebook friends
+* Handlebars.js, for templating
+* jQuery
+* Sass, Bourbon & Neat for the UI 
+
+Lots of cool shit.
 
 ### Todo
 
