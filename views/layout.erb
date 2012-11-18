@@ -69,7 +69,6 @@
           $('#user').append(user_template(user_data));
 
           $.each(data, function(i) {
-            console.log("Parsing");
             var post_source = $("#ajax-post").html();
             var post_template = Handlebars.compile(post_source);
             $('#results').append(post_template(data[i]));
