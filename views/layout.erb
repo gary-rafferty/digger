@@ -24,6 +24,16 @@
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
   <script type='text/javascript' src='http://cloud.github.com/downloads/wycats/handlebars.js/handlebars-1.0.rc.1.js'></script>
   <script type='text/javascript' src='http://github.com/bartaz/sandbox.js/raw/master/jquery.highlight.js'></script>
+  <script id="ajax-user" type="text/x-handlebars-template">
+    <div class='user'>
+      <div class='user-avatar'>
+        <img class='avatar' src='https://graph.facebook.com/{{user_id}}/picture?type=large' />
+      </div>
+      <div class='user-text'>
+        <p>{{text}}</p>
+      </div>
+    </div>
+  </script>
   <script id="ajax-post" type="text/x-handlebars-template">
     <div class='post'>
       <p>{{message}}</p>
@@ -32,7 +42,10 @@
   </script>
   <script type='text/javascript'>
     $('#submit').click(function(event) {
+      $('#user').empty();
       $('#results').empty();
+      $('#submit').html('Searching...');
+
       var _query= $('#form-needle input').val();
       var _user = $('#form-haystack input').val();
 
@@ -44,13 +57,27 @@
         success: function(data) {
           $('#form-needle input').val('');
           $('#form-haystack input').val('');
+
+          var _user_id = data.shift();
+          var _count = data.length;
+
+          var user_data = {user_id: _user_id, text: "Showing "+_count+" results for "+_query};
+
+          var user_source = $("#ajax-user").html();
+          var user_template = Handlebars.compile(user_source);
+
+          $('#user').append(user_template(user_data));
+
           $.each(data, function(i) {
-            var source = $("#ajax-post").html();
-            var template = Handlebars.compile(source);
-            $('#results').append(template(data[i]));
+            console.log("Parsing");
+            var post_source = $("#ajax-post").html();
+            var post_template = Handlebars.compile(post_source);
+            $('#results').append(post_template(data[i]));
             $('.post').highlight(_query);
             $('.highlight').css({ backgroundColor:"#ffff88"});
           });
+
+          $('#submit').html('Diggidy Diggidy');
         }
       });
 

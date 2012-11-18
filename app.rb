@@ -70,12 +70,18 @@ class Digger < Sinatra::Base
     user  = params[:user]
     graph = @graph ||= Facebook::API.new(session['access_token'])
 
-    friend_id = $redis.hget(session['me'], "#{user.gsub(' ','_')}")
+    @friend_id = $redis.hget(session['me'], "#{user.gsub(' ','_')}")
 
-    fql_q = "select actor_id,post_id,message,created_time from stream where source_id = #{friend_id} limit 1000"
+    fql_q = "select actor_id,post_id,message,created_time from stream where source_id = #{@friend_id} limit 1000"
     posts = graph.fql_query(fql_q)
 
-    @matches = posts.select { |p| p['message'] =~ /#{query}/ }
+    @matches = posts.select {|p|
+      p['message'] =~ /#{query}/
+    }.each {|p|
+      p['created_time'] = Time.at(p['created_time']).strftime("%Y-%m-%d %H:%M")
+    }
+
+    @matches.unshift(@friend_id)
 
     p @matches.to_json
   end

@@ -78,6 +78,33 @@
       padding: 10px;
       width: 90%; }
 
+#user {
+  display: block;
+  float: left;
+  margin-right: 2.35765%;
+  width: 100%;
+  margin-top: 40px; }
+  #user:last-child {
+    margin-right: 0; }
+  #user .user-avatar {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 6.17215%; }
+    #user .user-avatar:last-child {
+      margin-right: 0; }
+    #user .user-avatar img {
+      height: 90px;
+      width: 90px; }
+  #user .user-text {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 91.4702%;
+    margin-right: 0; }
+    #user .user-text:last-child {
+      margin-right: 0; }
+
 #results {
   display: block;
   float: left;
