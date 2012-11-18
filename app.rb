@@ -22,10 +22,16 @@ class Digger < Sinatra::Base
   configure do
     enable :sessions
 
-    config = YAML.load_file(File.expand_path('config.yml',File.dirname(__FILE__)))
-    set :app_id, config['app_id']
-    set :secret, config['secret']
-    set :url,    config['url'] || 'http://localhost:4567/'
+    if(ENV['RACK_ENV'] == 'production')
+      set :app_id, ENV['APP_ID']
+      set :secret, ENV['SECRET']
+      set :url, ENV['URL']
+    else
+      config = YAML.load_file(File.expand_path('config.yml',File.dirname(__FILE__)))
+      set :app_id, config['app_id']
+      set :secret, config['secret']
+      set :url,    config['url'] || 'http://localhost:4567/'
+    end
 
     MongoMapper.database = 'postsearch'
 
