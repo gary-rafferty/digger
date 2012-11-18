@@ -39,8 +39,9 @@ class Digger < Sinatra::Base
       MongoMapper.config = { production: { uri: ENV['MONGOHQ_URL'] } }
     end
 
-    if(ENV['REDISTOGO_URL']) 
-      $redis = Redis.new(ENV['REDISTOGO_URL'])
+    if(ENV['REDISTOGO_URL'])
+      uri = URI.parse(ENV["REDISTOGO_URL"])
+      $redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
     else
       $redis = Redis.new
     end
