@@ -36,7 +36,8 @@ class Digger < Sinatra::Base
     MongoMapper.database = 'postsearch'
 
     if(ENV['MONGOHQ_URL'])
-      MongoMapper.config = { production: { uri: ENV['MONGOHQ_URL'] } }
+      MongoMapper.config = { 'production' =>  { 'uri' => ENV['MONGOHQ_URL'] } }
+      MongoMapper.connect('production')
     end
 
     if(ENV['REDISTOGO_URL'])
