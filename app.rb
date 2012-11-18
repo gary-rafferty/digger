@@ -29,7 +29,15 @@ class Digger < Sinatra::Base
 
     MongoMapper.database = 'postsearch'
 
-    $redis = Redis.new
+    if(ENV['MONGOHQ_URL'])
+      MongoMapper.config = { production: { uri: ENV['MONGOHQ_URL'] } }
+    end
+
+    if(ENV['REDISTOGO_URL']) 
+      $redis = Redis.new(ENV['REDISTOGO_URL'])
+    else
+      $redis = Redis.new
+    end
   end
 
   helpers do
