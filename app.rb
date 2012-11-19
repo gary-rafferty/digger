@@ -22,30 +22,28 @@ class Digger < Sinatra::Base
   configure do
     enable :sessions
 
-    if(ENV['RACK_ENV'] == 'production')
-      set :app_id, ENV['APP_ID']
-      set :secret, ENV['SECRET']
-      set :url, ENV['URL']
-    else
-      config = YAML.load_file(File.expand_path('config.yml',File.dirname(__FILE__)))
-      set :app_id, config['app_id']
-      set :secret, config['secret']
-      set :url,    config['url'] || 'http://localhost:4567/'
-    end
-
     MongoMapper.database = 'postsearch'
+  end
 
-    if(ENV['MONGOHQ_URL'])
-      MongoMapper.config = { 'production' =>  { 'uri' => ENV['MONGOHQ_URL'] } }
-      MongoMapper.connect('production')
-    end
+  configure :development do
+    config = YAML.load_file(File.expand_path('config.yml',File.dirname(__FILE__)))
+    set :app_id, config['app_id']
+    set :secret, config['secret']
+    set :url,    config['url'] || 'http://localhost:4567/'
 
-    if(ENV['REDISTOGO_URL'])
-      uri = URI.parse(ENV["REDISTOGO_URL"])
-      $redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-    else
-      $redis = Redis.new
-    end
+    $redis = Redis.new
+  end
+
+  configure :production do
+    set :app_id, ENV['APP_ID']
+    set :secret, ENV['SECRET']
+    set :url, ENV['URL']
+
+    MongoMapper.config = { 'production' =>  { 'uri' => ENV['MONGOHQ_URL'] } }
+    MongoMapper.connect('production')
+
+    uri = URI.parse(ENV["REDISTOGO_URL"])
+    $redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   end
 
   helpers do
